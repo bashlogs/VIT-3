@@ -1,36 +1,31 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-void swap(int* a, int* b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
+void quicksort(int *a, int low, int high) {
+    int i = low;
+    int j = high;
+    int temp;
+    int pivot = (low + high) / 2;
 
-void quicksort(int a[], int p, int q) {
-    int i = p;
-    int j = q;
-    int pivot = (i + j) / 2;
-
-    while (i < j) {
-        while (a[i] < a[pivot]) {
+    while (i <= j) {
+        while (a[i] < a[pivot])
             i++;
-        }
-        while (a[j] > a[pivot]) {
+        while (a[j] > a[pivot])
             j--;
-        }
         if (i <= j) {
-            swap(&a[i], &a[j]);
+            temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
             i++;
             j--;
         }
     }
 
-    if (p < j) {
-        quicksort(a, p, j);
+    if (low < j) {
+        quicksort(a, low, j);
     }
-    if (i < q) {
-        quicksort(a, i, q);
+    if (i < high) {
+        quicksort(a, i, high);
     }
 }
 
@@ -42,7 +37,7 @@ void printarray(int a[], int n) {
 }
 
 int main() {
-    int array[] = {34, 64, 21, 35, 22, 67, 83, 12, 45, 21, 42};
+    int array[] = {32,52,14,12,55,32,15,8,56};
     int n = sizeof(array) / sizeof(array[0]);
 
     printf("Original array: ");
