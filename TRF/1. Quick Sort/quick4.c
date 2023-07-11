@@ -16,23 +16,21 @@ void quicksort3way(int arr[], int low, int high) {
     int gt = high;
     int i = low;
 
-    while (lt <= gt) {
-      while(arr[lt] < arr[pivot]){
-        lt++;
-      }
-      while(arr[gt] < arr[pivot]){
-        gt--;  
-      }
-      if(lt<=gt){
-        swap(&arr[i],&arr[gt]);
-        lt++;
-        gt--;
-      }
+    while (i <= gt) {
+        if (arr[i] < pivot) {
+            swap(&arr[i], &arr[lt]);
+            i++;
+            lt++;
+        } else if (arr[i] > pivot) {
+            swap(&arr[i], &arr[gt]);
+            gt--;
+        } else {
+            i++;
+        }
     }
-    if(low<gt)
-      quicksort3way(arr, low, lt - 1);
-    if(lt<high)
-      quicksort3way(arr, gt + 1, high);
+
+    quicksort3way(arr, low, lt - 1);
+    quicksort3way(arr, gt + 1, high);
 }
 
 void printArray(int arr[], int size) {
@@ -56,4 +54,3 @@ int main() {
 
     return 0;
 }
-

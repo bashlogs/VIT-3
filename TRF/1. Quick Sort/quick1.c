@@ -1,8 +1,3 @@
-//WAP to implement Bucket Sort and Quick sort on 1D array of Faculty
-//structure (contains faculty_name, faculty_ID, subject_codes,
-//class_names), with key as faculty_ID. And count the number of swap
-//performed
-
 #include <stdio.h>
 #include <string.h>
 int count;
@@ -20,8 +15,8 @@ int partition(int fac[], int low, int high) {
   int j = high;
   int tfac;
 
-  do{
-    while(fac[i] <= fac[pivot] && i<high) {
+  while(i < j){
+    while(fac[i] < fac[pivot]) {
       i++;
     }
     while(fac[j] > fac[pivot]) {
@@ -30,7 +25,7 @@ int partition(int fac[], int low, int high) {
     if(i < j) {
       swap(&fac[i], &fac[j]);
     }
-  } while(i < j);
+  }
 
   swap(&fac[pivot], &fac[j]);
   return j;
@@ -41,7 +36,7 @@ void quickSort(int fac[], int low, int high) {
   if(low < high) {
     partitionIndex = partition(fac, low, high);
     quickSort(fac, low, partitionIndex - 1);
-    quickSort(fac, partitionIndex + 1, high);
+    quickSort(fac, partitionIndex + 1, high); 
   }
 }
 
