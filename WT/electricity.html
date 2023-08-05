@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Calculator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center">Electricity Bill Calculator</h1>
+        <form id="electricityForm" class="mt-4">
+            <div class="form-group">
+                <label for="units">Units Consumed:</label>
+                <input type="number" class="form-control" id="units" name="units" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </form>
+        <div id="result" class="mt-4 d-none">
+            <h3 class="text-center">Electricity Bill</h3>
+            <p class="text-center" id="billAmount"></p>
+        </div>
+    </div>
+
+    <!-- Include jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // jQuery code for form submission and bill calculation
+        $(document).ready(function () {
+            $("#electricityForm").submit(function (event) {
+                event.preventDefault();
+                let units = parseFloat($("#units").val());
+                let billAmount = 0;
+                
+                // Calculate the electricity bill based on given conditions
+                if (units <= 50) {
+                    billAmount = units * 3.50;
+                } else if (units <= 150) {
+                    billAmount = 50 * 3.50 + (units - 50) * 4.00;
+                } else if (units <= 250) {
+                    billAmount = 50 * 3.50 + 100 * 4.00 + (units - 150) * 5.20;
+                } else {
+                    billAmount = 50 * 3.50 + 100 * 4.00 + 100 * 5.20 + (units - 250) * 6.50;
+                }
+                
+                // Display the result
+                $("#billAmount").text("Total Bill Amount: Rs. " + billAmount.toFixed(2));
+                $("#result").removeClass("d-none");
+            });
+        });
+    </script>
+</body>
+</html>
