@@ -1,11 +1,10 @@
 #include <stdio.h>
 
 int main(){
-    int n,b;
+    int n,b=2;
     printf("Enter the number of people: ");
     scanf("%d", &n);
-    printf("Enter your position: ");
-    scanf("%d", &b);
+    printf("Every alternate person is killed\n");
     int a[n];
     for(int i=0; i<n; i++){
         a[i] = 1;

@@ -4,6 +4,7 @@
 #include <time.h>
 
 int count;
+int **matrix;
 
 void swap(int *a, int *b) {
   int t;
@@ -15,15 +16,17 @@ void swap(int *a, int *b) {
 
 int partition(int fac[], int low, int high) {
   srand(time(NULL)); 
-  int pivot = low + rand() % (high - low + 1);  
+  int pivot = low + rand() % (high - low + 1); 
   int i = low + 1;
   int j = high;
 
   while (i < j) {
     while (fac[i] < fac[pivot]) {
+      matrix[i][pivot] += 1;
       i++;
     }
     while (fac[j] > fac[pivot]) {
+      matrix[j][pivot] += 1;
       j--;
     }
     if (i < j) {

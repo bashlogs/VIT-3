@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 int count;
 int **matrix;
@@ -12,29 +13,35 @@ void swap(int *a, int *b) {
   *b = t;
   count++;
 }
+
 int partition(int fac[], int low, int high) {
   int pivot = low;
   int i = low + 1;
   int j = high;
   int tfac;
 
-  while(i < j){
-    while(fac[i] < fac[pivot]) {
+  while (i < j) {
+    while (fac[i] < fac[pivot] && i <= high) {
+      matrix[i][pivot] += 1;
+      matrix[pivot][i] += 1;
       i++;
     }
-    while(fac[j] > fac[pivot]) {
+    while (fac[pivot] < fac[j] && j >= low + 1) {
+      matrix[pivot][j] += 1;
+      matrix[j][pivot] += 1;
       j--;
     }
-    if(i < j) {
+
+    if (i < j) {
+      // matrix[i][j] += 1;
       swap(&fac[i], &fac[j]);
-      matrix[i][j] += 1;
       printf("Swap: (%d, %d)\n", fac[i], fac[j]);
     }
   }
 
+  // matrix[pivot][j] += 1;
   swap(&fac[pivot], &fac[j]);
-  matrix[i][j] += 1;
-  printf("Swap: (%d, %d)\n", fac[i], fac[j]);
+  printf("Swap: (%d, %d)\n", fac[pivot], fac[j]);
   return j;
 }
 
@@ -55,7 +62,7 @@ void printarray(int arr[], int size){
 }
 
 int main() {
-  int n, arr[]={32,52,14,35,12,55,32,115,8,56};
+  int n, arr[]={4,3,2,1};
   n = sizeof(arr)/sizeof(arr[0]);
 
   matrix = (int **)malloc(n * sizeof(int *));
@@ -69,9 +76,11 @@ int main() {
     }
   }
 
-  quickSort(arr, 0, n-1);
   printf("Unsorted array: ");
   printarray(arr, n);
+
+  quickSort(arr, 0, n-1);
+
   printf("Sorted array: ");
   printarray(arr, n);
   printf("\n");
