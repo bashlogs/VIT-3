@@ -38,7 +38,7 @@ void minheap(int a[], int min, int size){
 
 void heapsort(int a[],int size){
     int i, t;
-    for(int i=size-1; i > 0; i--){
+    for(int i=size-1; i > size-4; i--){
         t = a[0];
         a[0] = a[i];
         a[i] = t;
@@ -47,7 +47,7 @@ void heapsort(int a[],int size){
 }
 
 int main(){
-    int a[] = {6, 14, 3, 26, 8, 18, 21, 9, 5};
+    int a[] = {3,2,1,5,6,4};
     int size = sizeof(a)/sizeof(a[0]);
     printf("%d\n",size);
     minheap(a, 0, size);
