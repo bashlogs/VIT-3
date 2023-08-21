@@ -60,24 +60,28 @@ void quick_sort(int a[], int i, int j) {
 int partition(int a[], int i, int j) {
   int low = i, right = j, left = i, flag = 0;
   while (flag != 1) {
+
     while ((a[low] <= a[right]) && (low != right)) {
-      matrix[low][right]++;
-      matrix[right][low]++;
+      matrix[a[low]][a[right]]++;
+      matrix[a[right]][a[low]]++;
       right--;
     }
+
     if (low == right) {
       flag = 1;
-    } else if (a[low] > a[right]) {
+    } 
+    else if (a[low] > a[right]) {
       int temp;
       temp = a[low];
       a[low] = a[right];
       a[right] = temp;
       low = right;
     }
+
     if (flag != 1) {
       while (a[low] >= a[left] && (low != left)) {
-        matrix[left][low]++;
-        matrix[low][left]++;
+        matrix[a[left]][a[low]]++;
+        matrix[a[low]][a[left]]++;
         left++;
       }
       if (low == left) {
@@ -90,6 +94,7 @@ int partition(int a[], int i, int j) {
         low = left;
       }
     }
+
   }
   return low;
 }

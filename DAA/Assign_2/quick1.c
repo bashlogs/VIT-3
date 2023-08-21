@@ -1,48 +1,51 @@
-#include <stdio.h>
+7r#include <stdio.h>
 #include <stdlib.h>
 
 void quick_sort(int a[], int, int);
 int partition(int a[], int, int);
-float **matrix;
+int **matrix;
 
 int main() {
-  int n, c;
-  printf("Enter the number of iterations: "); 
-  scanf("%d", &c);
+  int n;
   printf("Enter no. of element: ");
   scanf("%d", &n);
+  int arr[n];
 
-  matrix = (float **)malloc(n * sizeof(float *));
+  printf("Enter the elements: ");
   for (int i = 0; i < n; i++) {
-    matrix[i] = (float *)malloc(n * sizeof(float));
+    scanf("%d", &arr[i]);
+  }
+
+  matrix = (int **)malloc(n * sizeof(int *));
+  for (int i = 0; i < n; i++) {
+    matrix[i] = (int *)malloc(n * sizeof(int));
     for (int j = 0; j < n; j++) {
       matrix[i][j] = 0;
     }
   }
-  int arr[n];
-  for(int i=0; i<c; i++){
-    for(int j=0; j<=n; j++){
-        arr[j] = j;
-    }
-    for (int i= n-1; i>= 1;	i--){
-        int k = rand() % i;
-        int temp = arr[k]; 
-        arr[k] = arr[i]; 
-        arr[i] = temp;
-    }
 
-    quick_sort(arr, 0, n - 1);
+  quick_sort(arr, 0, n - 1);
+
+  printf("\nSorted Array: ");
+  for (int i = 0; i < n; i++) {
+    printf("%d\t", arr[i]);
   }
 
   printf("\n\nThe number of comparisons made are as follows: \n");
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
-      printf("%.2f ", matrix[i][j]/c);
+      printf("%d ", matrix[i][j]);
     }
     printf("\n");
   }
+
+  // Free allocated memory
+  for (int i = 0; i < n; i++) {
+    free(matrix[i]);
+  }
+  free(matrix);
+
   return 0;
-  
 }
 
 void quick_sort(int a[], int i, int j) {
@@ -55,17 +58,19 @@ void quick_sort(int a[], int i, int j) {
 }
 
 int partition(int a[], int i, int j) {
-  int right = j, left = i, flag = 0;
-  int low = i; 
+  int low = i, right = j, left = i, flag = 0;
   while (flag != 1) {
+
     while ((a[low] <= a[right]) && (low != right)) {
       matrix[a[low]][a[right]]++;
       matrix[a[right]][a[low]]++;
       right--;
     }
+
     if (low == right) {
       flag = 1;
     } 
+    
     else if (a[low] > a[right]) {
       int temp;
       temp = a[low];
@@ -73,6 +78,7 @@ int partition(int a[], int i, int j) {
       a[right] = temp;
       low = right;
     }
+
     if (flag != 1) {
       while (a[low] >= a[left] && (low != left)) {
         matrix[a[left]][a[low]]++;
@@ -89,6 +95,7 @@ int partition(int a[], int i, int j) {
         low = left;
       }
     }
+
   }
   return low;
 }
