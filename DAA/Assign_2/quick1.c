@@ -1,4 +1,4 @@
-7r#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 void quick_sort(int a[], int, int);

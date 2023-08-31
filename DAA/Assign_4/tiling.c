@@ -28,7 +28,7 @@
         else{
             square[x+size1-1][y+size1-1]=current_tile;
             print_matrix(square,size,x,y);
-            matrix(square,size1,x+size1-1,y+size1-1,x,y);
+            matrix(square,size1,x+size1-1,y+size1-1,x,y) ;
         }
 
         if(i>=x+size1 && j<y+size1) 
