@@ -14,6 +14,6 @@ int yywrap() {
 int main()
 {
 yylex();
-printf("%d",count);
+printf("Count: %d",count);
 return 0;
 }

@@ -1,10 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- *
- * @author someone2
- */
 public class S_DES {
     private String plainText;
     private String encryptedText;
@@ -30,10 +26,9 @@ public class S_DES {
             return ;
         }   
         key = password.toCharArray();
-        
-        
-        // permutation P10
-        char permutation10[] = new char[10];
+             
+            char permutation10[] = new char[10];
+
         permutation10[0] = key[2];
         permutation10[1] = key[4];
         permutation10[2] = key[1];
@@ -299,9 +294,6 @@ public class S_DES {
             {0, 2, 1, 3},
             {3, 1, 3, 2}};
         
-        //The first and fourth input bits are treated as a 2-bit number
-        //that specify a row of the S-box and the second and third input bits 
-        //specify a column of the Sbox.
         char row[] = new char[2]; 
         char column[] = new char[2];
         
