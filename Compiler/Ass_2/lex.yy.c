@@ -261,6 +261,9 @@ static void yy_flex_free YY_PROTO(( void * ));
 
 #define YY_AT_BOL() (yy_current_buffer->yy_at_bol)
 
+
+#define yywrap() 1
+#define YY_SKIP_YYWRAP
 typedef unsigned char YY_CHAR;
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
 typedef int yy_state_type;
@@ -282,29 +285,29 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 2
-#define YY_END_OF_BUFFER 3
+#define YY_NUM_RULES 3
+#define YY_END_OF_BUFFER 4
 static yyconst short int yy_accept[7] =
     {   0,
-        0,    0,    3,    2,    1,    0
+        0,    0,    4,    1,    2,    0
     } ;
 
 static yyconst int yy_ec[256] =
     {   0,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    2,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    1,    1,    1,
-        1,    1,    1,    1,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        1,    1,    1,    1,    2,    1,    2,    2,    2,    2,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
 
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -357,12 +360,11 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "first.l"
+#line 1 ".\\another.l"
 #define INITIAL 0
-#line 2 "first.l"
-#include <stdio.h>
-int count=0;
-#line 366 "lex.yy.c"
+#line 3 ".\\another.l"
+int charcount=0,linecount=0;
+#line 368 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -513,9 +515,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 6 "first.l"
+#line 5 ".\\another.l"
 
-#line 519 "lex.yy.c"
+#line 521 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -600,17 +602,20 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 7 "first.l"
-{
-    count++;
-}
+#line 6 ".\\another.l"
+charcount++;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 10 "first.l"
+#line 7 ".\\another.l"
+{linecount++; charcount++;}
+	YY_BREAK
+case 3:
+YY_RULE_SETUP
+#line 8 ".\\another.l"
 ECHO;
 	YY_BREAK
-#line 614 "lex.yy.c"
+#line 619 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1496,14 +1501,11 @@ int main()
 	return 0;
 	}
 #endif
-#line 10 "first.l"
+#line 8 ".\\another.l"
 
-int yywrap() {
-    return 1;
-}
 int main()
 {
 yylex();
-printf("Count: %d",count);
+printf("There were %d characters in %d lines\n",charcount,linecount);
 return 0;
 }
